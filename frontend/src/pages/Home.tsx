@@ -5,6 +5,8 @@ import { Container, Form, Button } from 'react-bootstrap';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useState } from 'react';
 import combineAirportDetail from '../utils/combineAirportDetail';
+import { useNavigate } from 'react-router-dom';
+import { AxiosResponse } from 'axios';
 
 type Inputs = {
     originAirport: string;
@@ -18,6 +20,7 @@ interface Airport {
 }
 
 const Home: React.FC = () => {
+    const navigate = useNavigate();
     const [destinationAirport, setDestinationAirport] = useState<string>('');
     const [originAirport, setOriginAirport] = useState('');
     const [allAirport, setAllAirport] = useState<Airport[]>([]);
@@ -26,7 +29,6 @@ const Home: React.FC = () => {
         queryFn: () => {
             return axios.get('/flight/get-all-airport');
         },
-        refetchOnWindowFocus: false,
     });
     useEffect(() => {
         if (query.data) {
@@ -42,6 +44,11 @@ const Home: React.FC = () => {
     const findFlightMutation = useMutation({
         mutationFn: (data: Inputs) => {
             return axios.post('/flight/find', data);
+        },
+        onSuccess: (res: AxiosResponse) => {
+            navigate('/flight', {
+                state: res.data,
+            });
         },
     });
 

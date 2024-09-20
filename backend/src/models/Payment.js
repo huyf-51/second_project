@@ -10,20 +10,22 @@ Payment.init(
             autoIncrement: true,
             primaryKey: true,
         },
-        bookingId: DataTypes.INTEGER,
+        bookingId: DataTypes.STRING,
         amount: {
             type: DataTypes.BIGINT,
             validate: {
                 min: 0,
             },
         },
+        transactionDate: {
+            allowNull: true,
+            type: DataTypes.STRING,
+        },
     },
     {
-        timestamps: true,
+        timestamps: false,
         sequelize,
         modelName: 'Payment',
-        updatedAt: false,
-        createdAt: 'transactionDateTime',
     }
 );
 

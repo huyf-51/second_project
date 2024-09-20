@@ -7,9 +7,9 @@ class Booking extends Model {}
 Booking.init(
     {
         bookingId: {
-            type: DataTypes.INTEGER,
-            autoIncrement: true,
+            type: DataTypes.UUIDV4,
             primaryKey: true,
+            defaultValue: DataTypes.UUIDV4,
         },
         flightId: DataTypes.INTEGER,
         paymentStatus: DataTypes.BOOLEAN,
@@ -22,7 +22,7 @@ Booking.init(
     }
 );
 
-Booking.hasOne(Payment);
-Payment.belongsTo(Booking);
+Booking.hasOne(Payment, { foreignKey: 'bookingId' });
+Payment.belongsTo(Booking, { foreignKey: 'bookingId' });
 
 module.exports = Booking;

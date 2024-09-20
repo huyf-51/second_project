@@ -25,7 +25,7 @@ const Login: React.FC = () => {
         },
         onSuccess: (res) => {
             setAuth(res.data);
-            navigate('/');
+            navigate(-1);
         },
         onError: (error: AxiosError) => {
             setError(error.response?.data as string);

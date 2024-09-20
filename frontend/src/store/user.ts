@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 interface UserState {
     auth: { id: number } | null;
-    setAuth: (data: { id: number }) => void;
+    setAuth: (data: { id: number } | null) => void;
 }
 
 const useUserStore = create<UserState>()(

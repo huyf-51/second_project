@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -14,13 +14,14 @@ const Header: React.FC = () => {
             return axios.post('/auth/logout');
         },
     });
-    const { auth } = useUserStore();
+    const { auth, setAuth } = useUserStore();
     const [toggle, setToggle] = useState<boolean>(auth === null);
     const navigate = useNavigate();
 
     const handleLogout = () => {
         logoutMutation.mutate();
         useUserStore.persist.clearStorage();
+        setAuth(null);
         setToggle(true);
     };
 
@@ -31,6 +32,13 @@ const Header: React.FC = () => {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
+                            <Button
+                                variant="secondary"
+                                onClick={() => navigate('/')}
+                                className="me-3"
+                            >
+                                Home
+                            </Button>
                             {toggle ? (
                                 <>
                                     <Button
@@ -66,6 +74,13 @@ const Header: React.FC = () => {
                                     </Button>
                                 </>
                             )}
+                            <Button
+                                variant="primary"
+                                onClick={() => navigate('/find-ticket')}
+                                className="ms-3"
+                            >
+                                Find Ticket
+                            </Button>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

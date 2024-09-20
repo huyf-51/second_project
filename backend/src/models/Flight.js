@@ -44,7 +44,11 @@ Seat.belongsTo(Flight, {
     foreignKey: 'flightId',
 });
 
-Flight.hasMany(Booking);
-Booking.belongsTo(Flight);
+Flight.hasMany(Booking, {
+    foreignKey: 'flightId',
+});
+Booking.belongsTo(Flight, {
+    foreignKey: 'flightId',
+});
 
 module.exports = Flight;

@@ -35,8 +35,8 @@ Passenger.init(
     }
 );
 
-Passenger.hasMany(Booking);
-Booking.belongsTo(Passenger);
+Passenger.hasMany(Booking, { foreignKey: 'passengerId' });
+Booking.belongsTo(Passenger, { foreignKey: 'passengerId' });
 
 Passenger.hasOne(Seat, {
     foreignKey: 'passengerId',

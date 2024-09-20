@@ -20,7 +20,6 @@ const UserProfile: React.FC = () => {
     const { data, isSuccess } = useQuery({
         queryKey: ['get-user-info'],
         queryFn: getUserInfo,
-        refetchOnWindowFocus: false,
     });
     if (isSuccess) {
         return (
