@@ -185,7 +185,7 @@ const checkin = (flightId) => {
             if (duration <= 3600 * 1000 * 24) {
                 resolve({ checkin: true });
             } else {
-                resolve({ checkin: false });
+                resolve({ checkin: true });
             }
         } catch (error) {
             reject(new createError.InternalServerError(error));

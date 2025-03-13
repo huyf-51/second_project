@@ -8,10 +8,12 @@ const initRoutes = require('../src/routes/index');
 const errorController = require('../src/controllers/ErrorController');
 const RedisStore = require('connect-redis').default;
 const { createClient } = require('redis');
+const redis = require("./config/redis").getRedisInstance('redis://127.0.0.1:6379')
+const client = redis.getRedisClient()
 
 const redisClient = createClient();
 const redisStore = new RedisStore({
-    client: redisClient,
+    client: client,
     ttl: 3600 * 24 * 1000,
 });
 
