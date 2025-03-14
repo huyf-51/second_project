@@ -4,6 +4,6 @@ const catchError = require('../utils/catchError');
 const seatController = require('../controllers/SeatController');
 
 router.get('/get-all-seats/:id', catchError(seatController.getAllSeats));
-router.post('/choose-seat/:id', seatController.chooseSeat);
+router.post('/choose-seat/:id', catchError(seatController.chooseSeat));
 
 module.exports = router;

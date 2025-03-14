@@ -10,6 +10,7 @@ const RedisStore = require('connect-redis').default;
 const { createClient } = require('redis');
 const redis = require("./config/redis").getRedisInstance('redis://127.0.0.1:6379')
 const client = redis.getRedisClient()
+const socketIO = require('./config/socket')
 
 const redisClient = createClient();
 const redisStore = new RedisStore({
@@ -18,6 +19,8 @@ const redisStore = new RedisStore({
 });
 
 redisClient.connect().catch(console.error);
+socketIO()
+
 app.use(
     cors({
         origin: 'http://localhost:5173',

@@ -14,7 +14,7 @@ const createPassenger = (data) => {
             });
             resolve({ status: 'success' });
         } catch (error) {
-            reject(new createError.BadRequest());
+            reject(new createError.BadRequest(error));
         }
     });
 };
